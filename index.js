@@ -11,7 +11,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000", //Local
-      "https://plantify-client.vercel.app", //Production
+      "https://plantify-client-rosy.vercel.app", //Production
     ],
     credentials: true,
   }),
@@ -83,6 +83,13 @@ async function run() {
         }
         if (req.query.rating) {
           query.rating = { $gte: parseFloat(req.query.rating) };
+        }
+        if (req.query.size) {
+          query.size = req.query.size;
+        }
+        if (req.query.availability) {
+          if (req.query.availability === "In Stock") query.inStock = true;
+          if (req.query.availability === "Out of Stock") query.inStock = false;
         }
         if (req.query.search) {
           query.name = { $regex: req.query.search, $options: "i" };
