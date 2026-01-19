@@ -41,14 +41,15 @@ app.get("/", (req, res) => {
 
 async function run() {
   try {
-    await client.connect();
-    await client.db("admin").command({ ping: 1 });
+    // await client.connect();
+    // await client.db("admin").command({ ping: 1 });
 
     // ==================== Ping MongoDB ==================== //
     console.log("Connected to MongoDB! (Plantify Database)");
 
     // Collections
-    const plantsCollection = client.db("plantify-db").collection("plants");
+    const db = client.db('plantify-db')
+    const plantsCollection = db.collection("plants");
 
     // ==================== Routes ==================== //
 
